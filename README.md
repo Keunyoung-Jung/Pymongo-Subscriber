@@ -40,18 +40,18 @@ mongo_receiver = PymongoSubscriber(
     collection_name='testCOL')
 ```
 ### Function information
+Shutdown data receiver
 ```python
 mongo_receiver.close()
 ```
-Shutdown data receiver
+Forced update Buffer DB
 ```python
 mongo_receiver.update()
 ```
-Forced update Buffer DB
+Return All of data (pandas Dataframe type)
 ```python
 mongo_receiver.receive_all()
 ```
-Return All of data (pandas Dataframe type)
 ----
 Return first data (pandas Dataframe type)
 ```python
