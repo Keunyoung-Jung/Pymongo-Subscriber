@@ -15,6 +15,7 @@ class PymongoSubscriber:
         self.db_name = db_name
         self.collection_name = collection_name
         self.timeout = 15.0
+        self.update_event = False
 
         self._stop = False
         self._data_ready = threading.Event()
@@ -56,14 +57,19 @@ class PymongoSubscriber:
 
         while not self._stop:
             count = self.db[self.collection_name].count()
-            if not count == pre_count :
+            if pre_count == count or self.update_event:
                 # self._data_ready.clear()
                 self.make_csv()
                 pre_count = count
+                self.update_event = False
             self._data_ready.set()
 
     def close(self):
         self._stop = True
+        print('Closed PymongoSubscriver')
+    
+    def update(self) :
+        self.update_event = True
 
     def timeoutError(self,flag) :
         if not flag:
@@ -97,19 +103,22 @@ class PymongoSubscriber:
         self._data = data_frame
         flag = self._data_ready.wait(timeout=self.timeout)
         self.timeoutError(flag)
-        result = self.db[self.collection_name].insert_one(data.copy())
-        result.inserted_id
-        print('Insert complete !')
+        def insert(self) :
+            result = self.db[self.collection_name].insert_one(data.copy())
+            result.inserted_id
+        threading.Thread(target=insert,args=())
+        # print('Insert complete !')
 
     def insert_many_mongo(self,data) :
         data_frame = pd.read_csv('./pymongo_db/{}_{}_{}.csv'.format(self.cluster_name,self.db_name,self.collection_name))
-        data_frame = pd.concat([data_frame,pd.DataFrame([dict(data)])])
+        for x in data :
+            data_frame = pd.concat([data_frame,pd.DataFrame([dict(x)])])
         self._data = data_frame
         flag = self._data_ready.wait(timeout=self.timeout)
         self.timeoutError(flag)
         result = self.db[self.collection_name].insert_many(data.copy())
         result.inserted_ids
-        print('Insert complete !')
+        # print('Insert complete !')
 
     # def delete_one_mongo(self,key,value) :
 
