@@ -30,7 +30,7 @@ Nevertheless, because the data in the buffer db is updated without an id, it is 
 
 
 # How to use this code
-### Create Receiver variable
+## Create Receiver variable
 ```python
 mongo_receiver = PymongoSubscriber(
     _id='admin',
@@ -39,15 +39,42 @@ mongo_receiver = PymongoSubscriber(
     db_name='testDB',
     collection_name='testCOL')
 ```
-### API information
-`mongo_receiver.close()` - Shutdown data receiver    
-`mongo_receiver.update()` - Forced update Buffer DB    
-`mongo_receiver.receive_all()` - Return All of data (pandas Dataframe type)    
-`mongo_receiver.receive_first_one()` - Return first data (pandas Dataframe type)    
-`mongo_receiver.receive_last_one()` - Return last data (pandas Dataframe type)    
-`mongo_receiver.receive_search(key,value)` - Return find data using query (pandas Dataframe type)    
-`mongo_receiver.insert_one_mongo(data)` - Insert one data on MongoDB    
-`mongo_receiver.insert_many_mongo(data)` - Insert many data on MongoDB    
+## Example
+```python
+from pymongo_subscriber import PymongoSubscriber
+import pandas as pd
+import time
+import datetime
+
+mongo_receiver = PymongoSubscriber(
+    _id='admin',
+    _password='admin',
+    cluster_name='order',
+    db_name='toppingtable',
+    collection_name='order_list')
+
+last = mongo_receiver.receive_last_one()
+print(last['menu'])
+
+data = {
+    'menu':"Sweet_potato",
+    'store':"100th store",
+    'time':datetime.datetime.now(),
+    'cpu_time':time.time()
+}
+mongo_receiver.insert_one_mongo(data)
+
+```
+
+## API information
+`close()` - Shutdown data receiver    
+`update()` - Forced update Buffer DB    
+`receive_all()` - Return All of data (pandas Dataframe type)    
+`receive_first_one()` - Return first data (pandas Dataframe type)    
+`receive_last_one()` - Return last data (pandas Dataframe type)    
+`receive_search(key,value)` - Return find data using query (pandas Dataframe type)    
+`insert_one_mongo(data)` - Insert one data on MongoDB    
+`insert_many_mongo(data)` - Insert many data on MongoDB    
 
 # To do
 - [x] Use Thread
