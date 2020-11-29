@@ -40,7 +40,7 @@ mongo_receiver = PymongoSubscriber(
     collection_name='testCOL')
 ```
 ### Function information
-Shutdown data receiver : `mongo_receiver.close()`    
+`mongo_receiver.close()` - Shutdown data receiver    
 Forced update Buffer DB
 ```python
 mongo_receiver.update()
