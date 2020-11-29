@@ -18,99 +18,13 @@ So, I got the idea from the sub/pub method and I want to be able to use pymongo 
 # Speed compare
 ## Find data comparison
 Test after loading mongo client in advance    
-| | Default pymongo | Pymongo-Subscriber(Ours) |
+| | Default pymongo | Pymongo-Subscriber(This code) |
 |:-----:|--------:|--------:|
-
-### Find first data 100 times
-**Default pymongo**    
-Input : 
-```python
-st = time.time()
-for i in range(100) :
-    db[collection_name].find_one()
-print('time : {} second'.format(time.time()-st))
-```
-Output :
-```
-time : 19.329524755477905 second
-```
-    
-**Use Pymongo-Subscriber**    
-Input : 
-```python
-st = time.time()
-for i in range(100) :
-    mongo_receiver.receive_first_one()
-print('time : {} second'.format(time.time()-st))
-```
-Output :
-```
-time : 0.02027297019958496 second
-```
-
-
-### Find last data 100 times
-**Default pymongo**    
-Input : 
-```python
-st = time.time()
-for i in range(100) :
-    db[collection_name].find_one()
-print('time : {} second'.format(time.time()-st))
-```
-Output :
-```
-time : 19.313278675079346 second
-```
-    
-**Use Pymongo-Subscriber**    
-Input :   
-```python
-st = time.time()
-for i in range(100) :
-    mongo_receiver.receive_last_one()
-print('time : {} second'.format(time.time()-st))
-```
-Output :
-```
-time : 0.015398502349853516 second
-```
-
-### Find data using query 100K data
-
-## Insert data comparison
-### Insert one data
-**Default pymongo**    
-Input :   
-```python
-st = time.time()
-result = db[collection_name].insert_one({
-    'name' : 'test',
-    'time' : datetime.datetime.now()
-})
-result.inserted_id
-print('time : {} second'.format(time.time()-st))
-```
-Output :    
-```
-time : 1.5734267234802246 second
-```
-*I stopped this test because 5 hours is expected.*    
-    
-**Use Pymongo-Subscriber**    
-Input :   
-```python
-st = time.time()
-mongo_receiver.insert_one_mongo({
-    'name' : 'test',
-    'time' : datetime.datetime.now()
-})
-print('time : {} second'.format(time.time()-st))
-```
-Output :
-```
-time : 0.31127190589904785 second
-```
+| Find first data 100 times| 19.32sec | **0.02sec** |
+| Find last data 100 times | 19.31sec | **0.015sec** |
+| Find data using query 100K data | *Ready..* | *Ready..* |
+| Insert one data | 1.57sec | **0.31sec** |
+   
 *However, since the insert method is dependent on pymongo, it takes the same time to be reflected in the cloud server.    
 Nevertheless, because the data in the buffer db is updated without an id, it is possible to load and use the data.*      
 
@@ -126,6 +40,24 @@ mongo_receiver = PymongoSubscriber(
     collection_name='testCOL')
 ```
 ### Function information
+```python
+mongo_receiver.close()
+```
+    
+update()
+
+receive_all()
+
+receive_first_one()
+
+
+receive_last_one()
+    
+receive_search(key,value)
+
+insert_one_mongo(data)
+
+insert_many_mongo(data)
 
 # To do
 - [x] Use Thread
