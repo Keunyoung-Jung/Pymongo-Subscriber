@@ -18,6 +18,9 @@ So, I got the idea from the sub/pub method and I want to be able to use pymongo 
 # Speed compare
 ## Find data comparison
 Test after loading mongo client in advance    
+| | Default pymongo | Pymongo-Subscriber(Ours) |
+|:-----:|--------:|--------:|
+
 ### Find first data 100 times
 **Default pymongo**    
 Input : 
