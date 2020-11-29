@@ -1,2 +1,3 @@
 pymongo_db
 *.pyc
+*.ipynb
