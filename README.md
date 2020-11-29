@@ -8,7 +8,7 @@
 * pandas
 
 # Why the code was written
-This code helps to use MongoDB from cloud server in Python.    
+This code helps to use MongoDB on the cloud server in Python.    
 If pymongo is used as it is in python, it is too slow.   
 If you are going to create a real-time service using pymongo, it may not be possible to implement it using the default pymongo.    
 So, I got the idea from the sub/pub method and I want to be able to use pymongo on python in real time.    
