@@ -40,9 +40,9 @@ mongo_receiver = PymongoSubscriber(
     collection_name='testCOL')
 ```
 ### Function information
-```python
+`python
 mongo_receiver.close()
-```
+`
     
 update()
 
