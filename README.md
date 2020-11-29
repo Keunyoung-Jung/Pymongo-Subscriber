@@ -40,24 +40,39 @@ mongo_receiver = PymongoSubscriber(
     collection_name='testCOL')
 ```
 ### Function information
-`python
+Shutdown data receiver
+```python
 mongo_receiver.close()
-`
-    
-update()
+```
+Forced update Buffer DB
+```python
+mongo_receiver.update()
+```
+Return All of data (pandas Dataframe type)
+```python
+mongo_receiver.receive_all()
+```
 
-receive_all()
-
-receive_first_one()
-
-
-receive_last_one()
-    
-receive_search(key,value)
-
-insert_one_mongo(data)
-
-insert_many_mongo(data)
+Return first data (pandas Dataframe type)
+```python
+mongo_receiver.receive_first_one()
+```
+Return last data (pandas Dataframe type)
+```python
+mongo_receiver.receive_last_one()
+```
+Return find data using query (pandas Dataframe type)
+```python
+mongo_receiver.receive_search(key,value)
+```
+Insert one data on MongoDB
+```python
+mongo_receiver.insert_one_mongo(data)
+```
+Insert many data on MongoDB
+```python
+mongo_receiver.insert_many_mongo(data)
+```
 
 # To do
 - [x] Use Thread
