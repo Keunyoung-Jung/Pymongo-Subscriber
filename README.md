@@ -31,6 +31,7 @@ Output :
 ```
 time : 19.329524755477905 second
 ```
+    
 **Use Pymongo-Subscriber**    
 Input : 
 ```python
@@ -58,6 +59,7 @@ Output :
 ```
 time : 19.313278675079346 second
 ```
+    
 **Use Pymongo-Subscriber**    
 Input :   
 ```python
@@ -91,6 +93,7 @@ Output :
 time : 1.5734267234802246 second
 ```
 *I stopped this test because 5 hours is expected.*    
+    
 **Use Pymongo-Subscriber**    
 Input :   
 ```python
@@ -105,8 +108,8 @@ Output :
 ```
 time : 0.31127190589904785 second
 ```
-*However, since the insert method is dependent on pymongo, it takes the same time to be reflected in the cloud.    
-Nevertheless, the data in the buffer db is updated without an id, so it can be called and used.*    
+*However, since the insert method is dependent on pymongo, it takes the same time to be reflected in the cloud server.    
+Nevertheless, because the data in the buffer db is updated without an id, it is possible to load and use the data.*      
 
 
 # How to use this code
