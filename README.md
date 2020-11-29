@@ -41,13 +41,13 @@ mongo_receiver = PymongoSubscriber(
 ```
 ### API information
 `mongo_receiver.close()` - Shutdown data receiver    
-`mongo_receiver.update()` - Forced update Buffer DB
-`mongo_receiver.receive_all()` - Return All of data (pandas Dataframe type)
-`mongo_receiver.receive_first_one()` - Return first data (pandas Dataframe type)
-`mongo_receiver.receive_last_one()` - Return last data (pandas Dataframe type)
-`mongo_receiver.receive_search(key,value)` - Return find data using query (pandas Dataframe type)
-`mongo_receiver.insert_one_mongo(data)` - Insert one data on MongoDB
-`mongo_receiver.insert_many_mongo(data)` - Insert many data on MongoDB
+`mongo_receiver.update()` - Forced update Buffer DB    
+`mongo_receiver.receive_all()` - Return All of data (pandas Dataframe type)    
+`mongo_receiver.receive_first_one()` - Return first data (pandas Dataframe type)    
+`mongo_receiver.receive_last_one()` - Return last data (pandas Dataframe type)    
+`mongo_receiver.receive_search(key,value)` - Return find data using query (pandas Dataframe type)    
+`mongo_receiver.insert_one_mongo(data)` - Insert one data on MongoDB    
+`mongo_receiver.insert_many_mongo(data)` - Insert many data on MongoDB    
 
 # To do
 - [x] Use Thread
