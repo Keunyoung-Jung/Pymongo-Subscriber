@@ -3,15 +3,16 @@ import pandas as pd
 import time
 
 mongo_reader = PymongoSubscriber(
-    _id='admin',
-    _password='admin',
+    mid='admin',
+    password='admin',
     cluster_name='order',
     db_name='toppingtable',
     collection_name='order_list')
 
-while True :
-    last = mongo_reader.receive_last_one()
-    print(last['menu'])
+print(mongo_reader)
+# while True :
+#     last = mongo_reader.receive_last_one()
+#     print(last['menu'])
     # time.sleep(1)
     # st = time.time()
     # df = mongo_reader.receive_all()
