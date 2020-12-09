@@ -155,7 +155,7 @@ class PymongoSubscriber:
         '''
         insert many data to MongoDB using pymongo
         '''
-        self._data = pd.concat([self._data,pd.DataFrame([dict(x)] x for x in data)])
+        self._data = pd.concat([self._data,pd.DataFrame([dict(x)] for x in data)])
         flag = self._data_ready.wait(timeout=self._timeout)
         self.timeoutError(flag)
         def insert(self) :
