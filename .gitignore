@@ -1,2 +1,7 @@
 pymongo_db
+<<<<<<< HEAD
 __pycache__
+=======
+*.pyc
+*.ipynb
+>>>>>>> ee96904f8abe7ec856f995445413d07595592118

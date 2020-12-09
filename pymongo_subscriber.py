@@ -80,14 +80,15 @@ class PymongoSubscriber:
             "mongodb+srv://{}:{}@{}.wboft.mongodb.net/{}?retryWrites=true&w=majority"\
                 .format(self._mongo_id,self._mongo_password,self._cluster_name,self._db_name))
 
-        pre_count = mongo_client[self._db_name][self._collection_name].count()
+        self._db = mongo_client[self._db_name]
+        pre_count = self._db[self._collection_name].count()
         self._data = self.get_data(mongo_client)
         if self._make_csv :
             self.check_dir()
             self.make_csv()
 
         while not self._stop:
-            if not mongo_client[self._db_name][self._collection_name].count() == pre_count :
+            if not self._db[self._collection_name].count() == pre_count :
                 self._data_ready.clear()
                 self.get_data(mongo_client)
                 if self._make_csv :
@@ -132,8 +133,40 @@ class PymongoSubscriber:
     
     def receive_search(self,key,value) :
         '''
-        receives each data using search in the form of a data DataFrame 
+        receive each data using search in the form of a data DataFrame 
         '''
         flag = self._data_ready.wait(timeout=self._timeout)
         self.timeoutError(flag)
         return self._data.loc[self._data[key]==value]
+
+    def insert_one_mongo(self,data) :
+        '''
+        inserts one data to MongoDB using pymongo
+        '''
+        self._data = pd.concat([self._data,pd.DataFrame([dict(data)])])
+        flag = self._data_ready.wait(timeout=self._timeout)
+        self.timeoutError(flag)
+        def insert(self) :
+            result = self.db[self.collection_name].insert_one(data.copy()).inserted_id
+        threading.Thread(target=insert,args=())
+        # print('Insert complete !')
+
+    def insert_many_mongo(self,data) :
+        '''
+        insert many data to MongoDB using pymongo
+        '''
+        self._data = pd.concat([self._data,pd.DataFrame([dict(x)] x for x in data)])
+        flag = self._data_ready.wait(timeout=self._timeout)
+        self.timeoutError(flag)
+        def insert(self) :
+            result = self._db[self._collection_name].insert_many(data.copy()).inserted_ids
+        threading.Thread(target=insert,args=())
+        # print('Insert complete !')
+
+    # def delete_one_mongo(self,key,value) :
+
+    # def delete_manu_mongo(self,key,value) :
+    
+    # def update_one_mongo(self,key,value) :
+    
+    # def update_many_mongo(self,key,value) :
