@@ -91,5 +91,7 @@ mongo_receiver.insert_one_mongo(data)
 - [ ] Send insert Event
 - [ ] Send Update Event
 - [ ] Send Delete Event
+- [ ] Change method asyncio
+- [ ] Automatic synchronization between DataFrame and MongoDB
 - [ ] Write comments
 - [ ] Upgrading monitering MongoDB method
